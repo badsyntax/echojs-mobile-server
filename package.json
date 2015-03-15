@@ -1,0 +1,16 @@
+{
+  "name": "echojs-mobile-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node server"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lamernews-client": "^1.1.0",
+    "restify": "^3.0.0"
+  }
+}
