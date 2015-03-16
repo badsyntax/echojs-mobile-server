@@ -1,9 +1,8 @@
 var restify = require('restify');
 var pkg = require('./package.json');
 
-var lamer = require('lamernews-client');
-var client = lamer.createClient({ api: 'http://www.echojs.com' });
-
+var LamernewsAPI = require("lamernews-api");
+var api = new LamernewsAPI("http://echojs.com/api/");
 
 var server = restify.createServer({
   name: pkg.name,
@@ -15,12 +14,24 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 server.get('/list/:sort/:start/:count', function (req, res, next) {
-  client.list({
-    sort: req.params.sort,
-    start: parseInt(req.params.start, 10),
-    count: parseInt(req.params.count, 10)
-  }, function(err, body) {
-    res.send(body);
+
+  var signature = '/api/getnews/' + [
+    req.params.sort,
+    req.params.start,
+    req.params.count
+  ].join('/');
+
+  api.query(signature, function onDone(err, response) {
+    res.send(response);
+    next();
+  });
+});
+
+server.get('/comments/:newsId', function (req, res, next) {
+  var signature = '/api/getcomments/' + req.params.newsId;
+  api.query(signature, function onDone(err, response) {
+    if (err) throw err;
+    res.send(response.comments);
     next();
   });
 });

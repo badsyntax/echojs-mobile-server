@@ -1,7 +1,8 @@
 {
   "name": "echojs-mobile-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "EchoJS API server",
+  "repository": "https://github.com/badsyntax/echojs-mobile-server",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
@@ -10,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "lamernews-client": "^1.1.0",
+    "lamernews-api": "^0.1.3",
     "restify": "^3.0.0"
   }
 }
