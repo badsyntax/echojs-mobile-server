@@ -5,12 +5,15 @@
   "repository": "https://github.com/badsyntax/echojs-mobile-server",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm install",
-    "start": "node server"
+    "prestart": "npm install && (forever stop production || true)",
+    "prestart:release": "npm install && (forever stop production || true)",
+    "start": "node server",
+    "start:release": "NODE_ENV=production forever --append --uid \"production\" start server.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "forever": "^0.14.1",
     "lamernews-api": "^0.1.3",
     "restify": "^3.0.0"
   }

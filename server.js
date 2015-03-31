@@ -4,6 +4,9 @@ var pkg = require('./package.json');
 var LamernewsAPI = require("lamernews-api");
 var api = new LamernewsAPI("http://echojs.com/api/");
 
+var DEBUG = process.env.NODE_ENV !== 'production';
+var port = DEBUG ? 7000 : 80;
+
 var server = restify.createServer({
   name: pkg.name,
   version: pkg.version
@@ -36,6 +39,6 @@ server.get('/comments/:newsId', function (req, res, next) {
   });
 });
 
-server.listen(9000, function () {
+server.listen(port, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
